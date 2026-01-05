@@ -177,12 +177,12 @@ export default function TenderCreationPage() {
     tenderData.status === 'PUBLISHED';
   
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
       {/* Header */}
-      <header className="bg-linear-to-r from-slate-900 to-slate-800 border-b border-slate-700 px-8 py-6 shadow-md">
+      <header className="bg-white border-b border-gray-200 px-6 md:px-8 py-5 shadow-sm">
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-3xl font-bold text-white mb-1">Create New Tender</h1>
-          <p className="text-slate-300 text-sm">Complete the workflow to publish your tender for bidding</p>
+          <h1 className="text-2xl md:text-3xl font-semibold text-gray-900">Create New Tender</h1>
+          <p className="text-gray-600 text-sm mt-1">Complete the workflow to publish your tender for bidding</p>
         </div>
       </header>
       
@@ -194,8 +194,8 @@ export default function TenderCreationPage() {
       />
       
       {/* Main Content Area */}
-      <main className="flex-1 px-8 py-8 pb-24">
-        <div className="max-w-5xl mx-auto">
+      <main className="flex-1 px-4 md:px-8 py-6 md:py-8 pb-24">
+        <div className="max-w-7xl mx-auto">
           <StepContent
             currentStep={currentStep}
             tender={tenderData}
@@ -230,10 +230,10 @@ export default function TenderCreationPage() {
  */
 function StepIndicator({ steps, currentStep, onStepClick }) {
   return (
-    <div className="sticky top-0 z-30 bg-white/90 backdrop-blur border-b border-slate-200 px-8 py-5 shadow-sm">
-      <div className="max-w-5xl mx-auto">
+    <div className="bg-white border-b border-gray-200 px-6 md:px-8 py-6">
+      <div className="max-w-7xl mx-auto">
         <nav aria-label="Progress">
-          <ol className="flex items-center justify-between gap-3">
+          <ol className="flex items-center justify-between gap-2 md:gap-3">
             {steps.map((step, index) => {
               const isCurrent = step.number === currentStep;
               const isCompleted = step.number < currentStep;
@@ -247,11 +247,11 @@ function StepIndicator({ steps, currentStep, onStepClick }) {
                       onClick={() => onStepClick(step.number)}
                       disabled={isFuture}
                       className={`
-                        w-11 h-11 rounded-full flex items-center justify-center font-semibold text-sm
-                        transition-all duration-200 focus:outline-none focus:ring-4
-                        ${isCurrent ? 'bg-blue-600 text-white ring-4 ring-blue-200 shadow-md' : ''}
-                        ${isCompleted ? 'bg-green-600 text-white hover:bg-green-700 focus:ring-green-200' : ''}
-                        ${isFuture ? 'bg-slate-200 text-slate-500 cursor-not-allowed focus:ring-transparent' : ''}
+                        w-10 h-10 rounded-full flex items-center justify-center font-medium text-sm
+                        transition-all duration-200 focus:outline-none
+                        ${ isCurrent ? 'bg-primary-500 text-white shadow-md' : ''}
+                        ${isCompleted ? 'bg-green-500 text-white hover:bg-green-600' : ''}
+                        ${isFuture ? 'bg-gray-200 text-gray-500 cursor-not-allowed' : ''}
                       `}
                       aria-current={isCurrent ? 'step' : undefined}
                       aria-label={`${step.label} ${step.subtitle}`}
@@ -261,15 +261,15 @@ function StepIndicator({ steps, currentStep, onStepClick }) {
                     <div className="mt-2 space-y-0.5">
                       <span
                         className={`
-                          block text-sm font-semibold leading-tight truncate
-                          ${isCurrent ? 'text-blue-700' : ''}
-                          ${isCompleted ? 'text-green-700' : ''}
-                          ${isFuture ? 'text-slate-500' : ''}
+                          block text-xs md:text-sm font-medium leading-tight truncate
+                          ${isCurrent ? 'text-primary-600' : ''}
+                          ${isCompleted ? 'text-green-600' : ''}
+                          ${isFuture ? 'text-gray-500' : ''}
                         `}
                       >
                         {step.label}
                       </span>
-                      <span className="block text-xs text-slate-500 leading-tight truncate max-w-40">
+                      <span className="hidden md:block text-xs text-gray-500 leading-tight truncate max-w-40">
                         {step.subtitle}
                       </span>   
                     </div>
@@ -279,8 +279,8 @@ function StepIndicator({ steps, currentStep, onStepClick }) {
                   {index < steps.length - 1 && (
                     <div
                       className={`
-                        h-1 flex-1 mx-3 mb-10 rounded-full
-                        ${isCompleted ? 'bg-green-600' : 'bg-slate-200'}
+                        h-0.5 flex-1 mx-2 md:mx-3 mb-8 md:mb-10 rounded-full
+                        ${isCompleted ? 'bg-green-500' : 'bg-gray-200'}
                       `}
                     />
                   )}
@@ -376,12 +376,12 @@ function FooterActionBar({
   onSaveDraft,
 }) {
   return (
-    <footer className="sticky bottom-0 z-30 bg-white/90 backdrop-blur border-t border-slate-200 px-8 py-4 shadow-lg ">
-      <div className="max-w-5xl mx-auto flex items-center justify-between gap-4">
+    <footer className="bg-white border-t border-gray-200 px-6 md:px-8 py-4 shadow-lg">
+      <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
         {/* Left: Save Draft */}
         <button
           onClick={onSaveDraft}
-          className="h-11 px-4 text-sm font-semibold text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-200"
+          className="btn-secondary"
         >
           Save Draft
         </button>
@@ -393,11 +393,11 @@ function FooterActionBar({
             onClick={onBack}
             disabled={isBackDisabled}
             className={`
-              h-11 px-6 text-sm font-semibold rounded-lg transition-colors focus:outline-none focus:ring-2
+              btn-secondary
               ${
                 isBackDisabled
-                  ? 'bg-slate-100 text-slate-400 cursor-not-allowed focus:ring-transparent'
-                  : 'bg-white text-slate-700 border border-slate-300 hover:bg-slate-50 focus:ring-blue-200'
+                  ? 'opacity-50 cursor-not-allowed'
+                  : ''
               }
             `}
           >
@@ -409,11 +409,11 @@ function FooterActionBar({
             onClick={onNext}
             disabled={isNextDisabled}
             className={`
-              h-11 px-6 text-sm font-semibold rounded-lg transition-colors focus:outline-none focus:ring-2
+              btn-primary
               ${
                 isNextDisabled
-                  ? 'bg-slate-300 text-slate-500 cursor-not-allowed focus:ring-transparent'
-                  : 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-200 shadow-sm'
+                  ? 'opacity-50 cursor-not-allowed'
+                  : ''
               }
             `}
           >

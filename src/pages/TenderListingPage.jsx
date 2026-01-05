@@ -74,12 +74,12 @@ function TenderListingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50">
-      <div className="max-w-6xl mx-auto px-4 py-10">
+    <div className="min-h-screen bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-6 md:py-10">
         <header className="mb-6">
-          <p className="text-xs font-semibold text-blue-700 uppercase tracking-wide">TenderFlow</p>
-          <h1 className="text-3xl font-bold text-slate-900 mt-2">Active Tenders</h1>
-          <p className="text-sm text-slate-600 mt-1">
+          <p className="text-xs font-medium text-primary-600 uppercase tracking-wide">TenderFlow</p>
+          <h1 className="text-2xl md:text-3xl font-semibold text-gray-900 mt-2">Active Tenders</h1>
+          <p className="text-sm text-gray-600 mt-1">
             Browse published opportunities. This page is read-only and keeps all bidders on equal footing.
           </p>
         </header>
@@ -134,25 +134,30 @@ function TenderFilters({
   onDeadlineChange,
 }) {
   return (
-    <div className="bg-white border border-slate-200 rounded-xl shadow-sm p-4 flex flex-col gap-4">
+    <div className="card p-5">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="flex flex-col gap-1">
-          <label className="text-xs font-semibold text-slate-700">Search by Title</label>
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={(e) => onSearchChange(e.target.value)}
-            placeholder="Search tenders"
-            className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-200"
-          />
+        <div className="flex flex-col gap-1.5">
+          <label className="text-xs font-medium text-gray-700">Search by Title</label>
+          <div className="relative">
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => onSearchChange(e.target.value)}
+              placeholder="Search tenders..."
+              className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-primary-500"
+            />
+            <svg className="absolute left-3 top-2.5 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
         </div>
 
-        <div className="flex flex-col gap-1">
-          <label className="text-xs font-semibold text-slate-700">Category</label>
+        <div className="flex flex-col gap-1.5">
+          <label className="text-xs font-medium text-gray-700">Category</label>
           <select
             value={categoryFilter}
             onChange={(e) => onCategoryChange(e.target.value)}
-            className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-200"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:outline-none focus:border-primary-500"
           >
             <option value="all">All categories</option>
             {categories.map((cat) => (
@@ -163,12 +168,12 @@ function TenderFilters({
           </select>
         </div>
 
-        <div className="flex flex-col gap-1">
-          <label className="text-xs font-semibold text-slate-700">Authority</label>
+        <div className="flex flex-col gap-1.5">
+          <label className="text-xs font-medium text-gray-700">Authority</label>
           <select
             value={authorityFilter}
             onChange={(e) => onAuthorityChange(e.target.value)}
-            className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-200"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:outline-none focus:border-primary-500"
           >
             <option value="all">All authorities</option>
             {authorities.map((auth) => (
@@ -179,12 +184,12 @@ function TenderFilters({
           </select>
         </div>
 
-        <div className="flex flex-col gap-1">
-          <label className="text-xs font-semibold text-slate-700">Deadline Window</label>
+        <div className="flex flex-col gap-1.5">
+          <label className="text-xs font-medium text-gray-700">Deadline Window</label>
           <select
             value={deadlineFilter}
             onChange={(e) => onDeadlineChange(e.target.value)}
-            className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-blue-200"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm bg-white focus:outline-none focus:border-primary-500"
           >
             <option value="all">Any deadline</option>
             <option value="7">Closing in 7 days</option>
@@ -224,48 +229,48 @@ function TenderCard({ tender, onViewDetails }) {
   });
 
   return (
-    <div className="bg-white border border-slate-200 rounded-xl shadow-sm h-full flex flex-col hover:shadow-md hover:-translate-y-1 transition duration-150 ease-out">
-      <div className="p-4 flex-1 flex flex-col gap-3">
+    <div className="card h-full flex flex-col hover:shadow-lg transition-all duration-200">
+      <div className="p-5 flex-1 flex flex-col gap-3">
         <div className="flex items-start justify-between gap-3">
-          <div className="flex flex-col gap-1 min-w-0">
-            <p className="text-xs font-semibold text-blue-700">{tender.category}</p>
+          <div className="flex flex-col gap-1.5 min-w-0 flex-1">
+            <p className="text-xs font-medium text-primary-600 uppercase tracking-wide">{tender.category}</p>
             <h3
-              className="text-lg font-bold text-slate-900 leading-tight"
+              className="text-base md:text-lg font-semibold text-gray-900 leading-tight"
               style={{ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}
             >
               {tender.title}
             </h3>
-            <p className="text-xs text-slate-500">Tender ID: {tender.tenderId}</p>
+            <p className="text-xs text-gray-500">Tender ID: {tender.tenderId}</p>
           </div>
-          <span className={`px-3 py-1 text-xs font-semibold rounded-full ${statusClasses}`}>
+          <span className={`px-2.5 py-1 text-xs font-medium rounded-md shrink-0 ${statusClasses}`}>
             {statusLabel}
           </span>
         </div>
 
-        <div className="space-y-1 text-sm text-slate-700">
-          <div className="flex items-center gap-2">
-            <span className="font-semibold text-slate-800">Authority:</span>
+        <div className="space-y-2 text-sm text-gray-700">
+          <div className="flex items-start gap-2">
+            <span className="font-medium text-gray-800 shrink-0">Authority:</span>
             <span className="truncate">{tender.authority.organizationName}</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="font-semibold text-slate-800">Industry:</span>
-            <span className="text-slate-600">{tender.authority.industryDomain}</span>
+            <span className="font-medium text-gray-800 shrink-0">Industry:</span>
+            <span className="text-gray-600">{tender.authority.industryDomain}</span>
+          </div>
+          <div className="flex items-start gap-2">
+            <span className="font-medium text-gray-800 shrink-0">Deadline:</span>
+            <span className="text-gray-600">{formattedDeadline}</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="font-semibold text-slate-800">Submission:</span>
-            <span className="text-slate-600">{formattedDeadline}</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="font-semibold text-slate-800">Days Remaining:</span>
-            <span className="text-slate-900 font-semibold">{daysRemaining}</span>
+            <span className="font-medium text-gray-800 shrink-0">Days Left:</span>
+            <span className="text-gray-900 font-semibold">{daysRemaining} days</span>
           </div>
         </div>
       </div>
 
-      <div className="px-4 pb-4">
+      <div className="px-5 pb-5">
         <button
           onClick={() => onViewDetails(tender.tenderId)}
-          className="w-full inline-flex justify-center items-center px-4 py-2.5 text-sm font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-200"
+          className="btn-primary w-full"
         >
           View Details
         </button>
@@ -280,17 +285,20 @@ function TenderCard({ tender, onViewDetails }) {
  */
 function EmptyState({ onClear }) {
   return (
-    <div className="bg-white border border-slate-200 rounded-xl shadow-sm p-10 text-center flex flex-col items-center gap-3">
-      <svg className="w-12 h-12 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-2a2 2 0 012-2h2a2 2 0 012 2v2m-6 4h6a2 2 0 002-2v-5a2 2 0 00-.586-1.414l-4-4a2 2 0 00-2.828 0l-4 4A2 2 0 006 14v5a2 2 0 002 2z" />
+    <div className="card p-10 md:p-16 text-center flex flex-col items-center gap-4">
+      <svg className="w-16 h-16 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 17v-2a2 2 0 012-2h2a2 2 0 012 2v2m-6 4h6a2 2 0 002-2v-5a2 2 0 00-.586-1.414l-4-4a2 2 0 00-2.828 0l-4 4A2 2 0 006 14v5a2 2 0 002 2z" />
       </svg>
-      <p className="text-sm font-semibold text-slate-800">No tenders match your filters</p>
+      <div>
+        <p className="text-base font-medium text-gray-900">No tenders found</p>
+        <p className="text-sm text-gray-500 mt-1">Try adjusting your filters to see more results</p>
+      </div>
       {onClear && (
         <button
           onClick={onClear}
-          className="mt-1 inline-flex items-center px-4 py-2 text-sm font-semibold text-blue-700 bg-blue-50 border border-blue-200 rounded-lg hover:bg-blue-100"
+          className="mt-2 btn-secondary"
         >
-          Clear Filters
+          Clear All Filters
         </button>
       )}
     </div>

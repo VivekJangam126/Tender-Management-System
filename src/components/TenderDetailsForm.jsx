@@ -117,16 +117,21 @@ export default function TenderDetailsForm({ tender, setTender, setValidation }) 
   // ============================================
   
   return (
-    <div className="bg-white rounded-xl shadow-md border border-slate-200 p-8">
-      <div className="max-w-3xl">
-        <h2 className="text-2xl font-bold text-slate-900 mb-1">
-          Basic Tender Details
-        </h2>
-        <p className="text-sm text-slate-600 mb-8">
-          Define the core information about your tender
-        </p>
+    <div className="w-full max-w-5xl mx-auto py-6 px-4">
+      <div className="card">
+        {/* Header Section */}
+        <div className="px-6 md:px-8 py-6 border-b border-gray-200">
+          <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-1">
+            Basic Tender Details
+          </h2>
+          <p className="text-sm text-gray-600">
+            Define the core information about your tender
+          </p>
+        </div>
         
-        <form className="space-y-6">
+        {/* Form Section */}
+        <div className="px-6 md:px-8 py-6">
+          <form className="space-y-6">
           
           {/* Tender Title - REQUIRED */}
           <FormField
@@ -138,7 +143,7 @@ export default function TenderDetailsForm({ tender, setTender, setValidation }) 
               type="text"
               value={tender.title || ''}
               onChange={(e) => handleFieldChange('title', e.target.value)}
-              className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-slate-900 placeholder-slate-400"
+              className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-primary-500 bg-white text-gray-900 placeholder-gray-400 transition-all duration-200"
               placeholder="Enter the tender title"
             />
           </FormField>
@@ -153,7 +158,7 @@ export default function TenderDetailsForm({ tender, setTender, setValidation }) 
               type="text"
               value={tender.referenceId || ''}
               onChange={(e) => handleFieldChange('referenceId', e.target.value)}
-              className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-slate-900 placeholder-slate-400"
+              className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-primary-500 bg-white text-gray-900 placeholder-gray-400 transition-all duration-200"
               placeholder="e.g., TND-2026-001"
             />
           </FormField>
@@ -168,7 +173,7 @@ export default function TenderDetailsForm({ tender, setTender, setValidation }) 
               value={tender.description || ''}
               onChange={(e) => handleFieldChange('description', e.target.value)}
               rows={4}
-              className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-slate-900 placeholder-slate-400 resize-none"
+              className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-primary-500 bg-white text-gray-900 placeholder-gray-400 resize-none transition-all duration-200"
               placeholder="Provide a brief overview of the tender requirements"
             />
           </FormField>
@@ -182,7 +187,7 @@ export default function TenderDetailsForm({ tender, setTender, setValidation }) 
             <select
               value={tender.category || ''}
               onChange={(e) => handleFieldChange('category', e.target.value)}
-              className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-slate-900"
+              className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-primary-500 bg-white text-gray-900 transition-all duration-200 cursor-pointer"
             >
               {CATEGORY_OPTIONS.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -202,7 +207,8 @@ export default function TenderDetailsForm({ tender, setTender, setValidation }) 
               type="date"
               value={tender.submissionDeadline || ''}
               onChange={(e) => handleFieldChange('submissionDeadline', e.target.value)}
-              className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white text-slate-900"
+              className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:border-primary-500 bg-white text-gray-900 transition-all duration-200 cursor-pointer"
+              placeholder="dd-mm-yyyy"
             />
           </FormField>
           
@@ -216,11 +222,12 @@ export default function TenderDetailsForm({ tender, setTender, setValidation }) 
               type="text"
               value={tender.authorityOrganizationName || 'Loading...'}
               disabled
-              className="w-full px-4 py-2.5 bg-slate-100 border border-slate-300 rounded-lg text-slate-600 cursor-not-allowed"
+              className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-gray-600 cursor-not-allowed font-medium"
             />
           </FormField>
           
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   );
@@ -249,7 +256,7 @@ export default function TenderDetailsForm({ tender, setTender, setValidation }) 
 function FormField({ label, required, error, helpText, children }) {
   return (
     <div>
-      <label className="block text-sm font-semibold text-slate-700 mb-2">
+      <label className="block text-sm font-medium text-gray-700 mb-2">
         {label}
         {required && <span className="text-red-600 ml-1">*</span>}
       </label>
@@ -260,9 +267,9 @@ function FormField({ label, required, error, helpText, children }) {
       
       {/* Error Message */}
       {error && (
-        <p className="mt-1.5 text-sm text-red-600 flex items-center gap-1">
-          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-            <path fillRule="evenodd" d="M18.101 12.93a1 1 0 00-1.414-1.414L10 15.584l-6.687-6.687a1 1 0 00-1.414 1.414L8.586 17l-6.687 6.687a1 1 0 001.414 1.414L10 18.414l6.687 6.687a1 1 0 001.414-1.414L11.414 17l6.687-6.687z" clipRule="evenodd" />
+        <p className="mt-1.5 text-sm text-red-600 flex items-center gap-1.5">
+          <svg className="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
           </svg>
           {error}
         </p>
@@ -270,7 +277,7 @@ function FormField({ label, required, error, helpText, children }) {
       
       {/* Help Text */}
       {helpText && !error && (
-        <p className="mt-1.5 text-xs text-slate-500">
+        <p className="mt-1.5 text-xs text-gray-500">
           {helpText}
         </p>
       )}
