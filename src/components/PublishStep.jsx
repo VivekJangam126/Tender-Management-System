@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 /**
- * STEP 5: Preview & Publish (Final Tender Release)
+ * STEP 4: Preview & Publish (Final Tender Release)
  * 
  * CRITICAL GOVERNANCE RULES (NON-NEGOTIABLE):
  * - Publishing is IRREVERSIBLE (status changes from DRAFT to PUBLISHED)

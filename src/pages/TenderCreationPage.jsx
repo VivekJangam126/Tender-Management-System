@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import TenderDetailsForm from '../components/TenderDetailsForm';
 import ContentBuilder from '../components/ContentBuilder';
-import AIAssistPanel from '../components/AIAssistPanel';
 import FinalReviewPanel from '../components/FinalReviewPanel';
 import PublishStep from '../components/PublishStep';
 
@@ -47,10 +46,9 @@ export default function TenderCreationPage() {
   
   // Validation state per step
   // Step 1: TenderDetailsForm validation
-  // Step 2: ContentBuilder validation
-  // Step 3: AIAssistPanel (optional, no gate)
-  // Step 4: FinalReviewPanel validation
-  // Step 5: Mock for future implementation
+  // Step 2: ContentBuilder & AI Assistance validation (AI usage is optional)
+  // Step 3: FinalReviewPanel validation
+  // Step 4: PublishStep (no validation gate)
   const [validation, setValidation] = useState({
     step1: {
       isValid: false,
@@ -68,15 +66,14 @@ export default function TenderCreationPage() {
         emptyMandatoryContent: [],
       },
     },
-    step3: { isValid: true }, // Step 3 is optional, always valid
-    step4: {
+    step3: {
       isValid: false,
       blockingIssues: [],
       warnings: [],
       passedChecks: [],
       overriddenWarnings: [],
     },
-    step5: { isValid: false },
+    step4: { isValid: false },
   });
   
   // Modal states (for future use)
@@ -87,11 +84,10 @@ export default function TenderCreationPage() {
   
   // Step definitions (fixed, non-editable)
   const STEPS = [
-    { number: 1, label: 'Details', subtitle: 'Basics & metadata' },
-    { number: 2, label: 'Content', subtitle: 'Sections & ordering' },
-    { number: 3, label: 'Assist', subtitle: 'AI suggestions (optional)' },
-    { number: 4, label: 'Review', subtitle: 'Validation & overrides' },
-    { number: 5, label: 'Publish', subtitle: 'Final confirmation' },
+    { number: 1, label: 'Basic Details', subtitle: 'Basics & metadata' },
+    { number: 2, label: 'Content Builder & AI Assistance', subtitle: 'Sections, editing & AI' },
+    { number: 3, label: 'Final Review & Validation', subtitle: 'Validation & overrides' },
+    { number: 4, label: 'Preview & Publish', subtitle: 'Final confirmation' },
   ];
   
   // ============================================
@@ -111,17 +107,17 @@ export default function TenderCreationPage() {
   /**
    * Handles forward navigation
    * Rule: Only allowed if current step is valid
-   * Special rule for STEP 4: Check for blocking issues before allowing STEP 5
+   * Special rule for STEP 3: Check for blocking issues before allowing STEP 4
    */
   const handleNext = () => {
     const stepKey = `step${currentStep}`;
     
-    // Special check: Cannot proceed to STEP 5 if blocking issues exist
-    if (currentStep === 4 && validation.step4.blockingIssues.length > 0) {
+    // Special check: Cannot proceed to STEP 4 if blocking issues exist
+    if (currentStep === 3 && validation.step3.blockingIssues.length > 0) {
       return; // Block progression
     }
     
-    if (currentStep < 5 && validation[stepKey]?.isValid) {
+    if (currentStep < 4 && validation[stepKey]?.isValid) {
       setCurrentStep(currentStep + 1);
     }
   };
@@ -175,9 +171,9 @@ export default function TenderCreationPage() {
   const isBackDisabled = currentStep === 1 || tenderData.status === 'PUBLISHED';
   const stepKey = `step${currentStep}`;
   const isNextDisabled = 
-    currentStep === 5 || 
+    currentStep === 4 || 
     !validation[stepKey]?.isValid ||
-    (currentStep === 4 && validation.step4.blockingIssues.length > 0) ||
+    (currentStep === 3 && validation.step3.blockingIssues.length > 0) ||
     tenderData.status === 'PUBLISHED';
   
   return (
@@ -302,10 +298,9 @@ function StepIndicator({ steps, currentStep, onStepClick }) {
  * StepContent Component
  * Renders actual content for current step
  * Step 1: TenderDetailsForm (implemented)
- * Step 2: ContentBuilder (implemented)
- * Step 3: AIAssistPanel (implemented)
- * Step 4: FinalReviewPanel (implemented)
- * Step 5: PublishStep (implemented)
+ * Step 2: ContentBuilder & AI Assistance (implemented)
+ * Step 3: FinalReviewPanel (implemented)
+ * Step 4: PublishStep (implemented)
  */
 function StepContent({
   currentStep,
@@ -330,7 +325,7 @@ function StepContent({
     );
   }
   
-  // Step 2: Render ContentBuilder
+  // Step 2: Render ContentBuilder with AI Assistance
   if (currentStep === 2) {
     return (
       <ContentBuilder
@@ -342,19 +337,8 @@ function StepContent({
     );
   }
   
-  // Step 3: Render AIAssistPanel
+  // Step 3: Render FinalReviewPanel
   if (currentStep === 3) {
-    return (
-      <AIAssistPanel
-        sections={sections}
-        aiSuggestions={aiSuggestions}
-        setAISuggestions={setAISuggestions}
-      />
-    );
-  }
-  
-  // Step 4: Render FinalReviewPanel
-  if (currentStep === 4) {
     return (
       <FinalReviewPanel
         tender={tender}
@@ -364,8 +348,8 @@ function StepContent({
     );
   }
   
-  // Step 5: Render PublishStep
-  if (currentStep === 5) {
+  // Step 4: Render PublishStep
+  if (currentStep === 4) {
     return (
       <PublishStep
         tender={tender}
@@ -433,7 +417,7 @@ function FooterActionBar({
               }
             `}
           >
-            {currentStep === 5 ? 'Finish' : 'Next'}
+            {currentStep === 4 ? 'Finish' : 'Next'}
           </button>
         </div>
       </div>

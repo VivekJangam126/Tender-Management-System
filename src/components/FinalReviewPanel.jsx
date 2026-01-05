@@ -1,17 +1,17 @@
 import { useState, useEffect } from 'react';
 
 /**
- * STEP 4: Final Review & Validation (Pre-Publish Gate)
+ * STEP 3: Final Review & Validation (Pre-Publish Gate)
  * 
  * GOVERNANCE RULES (NON-NEGOTIABLE):
- * - STEP 4 is READ-ONLY (no content editing)
+ * - STEP 3 is READ-ONLY (no content editing)
  * - Issues are classified: BLOCKING | WARNING | PASS
  * - Blocking issues CANNOT be overridden (block progression)
  * - Warnings CAN be overridden with explicit justification
  * - All override actions are logged for audit
  * - No auto-fixing, no AI overrides
  * 
- * This component analyzes tender data integrity before STEP 5 publication.
+ * This component analyzes tender data integrity before STEP 4 publication.
  * It does NOT modify data or control navigation directly.
  */
 export default function FinalReviewPanel({ tender, sections, setValidation }) {
@@ -240,7 +240,7 @@ export default function FinalReviewPanel({ tender, sections, setValidation }) {
     // Update parent validation state
     setValidation((prev) => ({
       ...prev,
-      step4: {
+      step3: {
         isValid: blockingIssues.length === 0,
         blockingIssues,
         warnings,
