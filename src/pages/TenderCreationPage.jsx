@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import TenderDetailsForm from './components/TenderDetailsForm';
-import ContentBuilder from './components/ContentBuilder';
-import AIAssistPanel from './components/AIAssistPanel';
-import FinalReviewPanel from './components/FinalReviewPanel';
-import PublishStep from './components/PublishStep';
+import TenderDetailsForm from '../components/TenderDetailsForm';
+import ContentBuilder from '../components/ContentBuilder';
+import AIAssistPanel from '../components/AIAssistPanel';
+import FinalReviewPanel from '../components/FinalReviewPanel';
+import PublishStep from '../components/PublishStep';
 
 /**
  * PART 1: Tender Creation Workflow Shell
