@@ -3,7 +3,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import TenderListingPage from './pages/TenderListingPage.jsx'
 import TenderDetailPage from './pages/TenderDetailPage.jsx'
 import TenderAnalysisPage from './pages/TenderAnalysisPage.jsx'
-
+import TenderCreatePage from './pages/TenderCreationPage.jsx'
 function App() {
   return (
     <BrowserRouter>
@@ -12,6 +12,7 @@ function App() {
         <Route path="/tenders" element={<TenderListingPage />} />
         <Route path="/tenders/:tenderId" element={<TenderDetailPage />} />
         <Route path="/tenders/:tenderId/analysis" element={<TenderAnalysisPage />} />
+        <Route path="/tender-create" element={<TenderCreatePage />} />
         <Route
           path="*"
           element={
